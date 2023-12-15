@@ -6,8 +6,6 @@ First argument is the name of the Markdown file
 Second argument is the output file name
 """
 
-import hashlib
-import re
 import sys
 import os
 
@@ -21,17 +19,33 @@ if __name__ == "__main__":
 
     with open(sys.argv[1], 'r') as r:
         with open(sys.argv[2], 'w') as w:
+            ol_status = False
             ul_status = False
             for line in r:
                 length = len(line)
+                # strip to get tag
                 h = line.lstrip('#')
                 hlevel = line.count('#')
+                ol = line.lstrip('*')
+                ol_element = length - len(ol)
                 ul = line.lstrip('-')
                 ul_element = length - len(ul)
 
+                # headers
                 if 1 <= hlevel <= 7:
                     line = f"<h{hlevel}>{h.strip()}</h{hlevel}>\n"
 
+                # ordered list
+                if ol_element:
+                    if not ol_status:
+                        w.write('<ol>\n')
+                        ol_status = True
+                    line = f"<li>{ol.strip()}</li>\n"
+                if not ol_element and ol_status:
+                    w.write('</ol>\n')
+                    ol_status = False
+
+                # unordered list
                 if ul_element:
                     if not ul_status:
                         w.write('<ul>\n')
@@ -42,5 +56,11 @@ if __name__ == "__main__":
                     ul_status = False
 
                 w.write(line)
+
+            # close tags if open and EOF
+            if ol_status:
+                w.write('</ol>\n')
+            if ul_status:
+                w.write('</ul>\n')
 
     exit(0)

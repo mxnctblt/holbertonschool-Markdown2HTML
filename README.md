@@ -57,3 +57,17 @@ HTML generated:
     <li>Bye</li>
 </ul>
 ```
+3. Ordered listing
+```
+Improve markdown2html.py by parsing Ordered listing syntax for generating HTML:
+
+Markdown:
+* Hello
+* Bye
+
+HTML generated:
+<ol>
+    <li>Hello</li>
+    <li>Bye</li>
+</ol>
+```
