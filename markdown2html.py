@@ -15,7 +15,6 @@ if __name__ == "__main__":
         exit(1)
     if not os.path.exists(sys.argv[1]):
         sys.stderr.write("Missing " + sys.argv[1] + "\n")
-        print(file=sys.stderr)
         exit(1)
     else :
         exit(0)
