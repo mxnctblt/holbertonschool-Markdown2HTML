@@ -99,5 +99,13 @@ Markdown	| HTML generated
 ___________________________________
 **Hello**	| <b>Hello</b>
 __Hello__	| <em>Hello</em>
+```
+6. ... but why??
+```
+Improve markdown2html.py by parsing bold syntax for generating HTML:
 
+Markdown	  | HTML generated	             | description
+________________________________________________________________________________________________________
+[[Hello]]	  | 8b1a9953c4611296a827abf8c47804d7 | convert in MD5 (lowercase) the content
+((Hello Chicago)) | Hello hiago	                     | remove all c (case insensitive) from the content
 ```

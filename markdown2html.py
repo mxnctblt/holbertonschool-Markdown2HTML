@@ -6,6 +6,7 @@ First argument is the name of the Markdown file
 Second argument is the output file name
 """
 
+import hashlib
 import sys
 import os
 
@@ -43,6 +44,24 @@ if __name__ == "__main__":
                     else:
                         line = line.replace('__', '</em>', 1)
                     emphasis_counter += 1
+                
+                # convert in MD5
+                while '[[' in line and ']]' in line:
+                    start = line.find('[[')
+                    end = line.find(']]')
+                    if start < end:
+                        text = line[start + 2:end]
+                        md5_text = hashlib.md5(text.encode()).hexdigest()
+                        line = line[:start] + md5_text + line[end + 2:]
+
+                # remove all c
+                while '((' in line and '))' in line:
+                    start = line.find('((')
+                    end = line.find('))')
+                    if start < end:
+                        text = line[start + 2:end]
+                        text_without_c = text.replace('c', '').replace('C', '')
+                        line = line[:start] + text_without_c + line[end + 2:]
 
                 length = len(line)
 
