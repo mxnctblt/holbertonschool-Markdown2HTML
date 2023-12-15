@@ -33,8 +33,6 @@ Requirements:
 ```
 Improve markdown2html.py by parsing Headings Markdown syntax for generating HTML:
 
-Syntax: (you can assume it will be strictly this syntax)
-
 Markdown	        |     HTML generated
 ____________________________________________________
 # Heading level 1	| <h1>Heading level 1</h1>
@@ -43,4 +41,19 @@ ____________________________________________________
 #### Heading level 4	| <h4>Heading level 4</h4>
 ##### Heading level 5	| <h5>Heading level 5</h5>
 ###### Heading level 6	| <h6>Heading level 6</h6>
+```
+
+2. Unordered listing
+```
+Improve markdown2html.py by parsing Unordered listing syntax for generating HTML:
+
+Markdown:
+- Hello
+- Bye
+
+HTML generated:
+<ul>
+    <li>Hello</li>
+    <li>Bye</li>
+</ul>
 ```
