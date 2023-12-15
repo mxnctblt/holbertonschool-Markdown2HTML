@@ -21,6 +21,7 @@ if __name__ == "__main__":
         with open(sys.argv[2], 'w') as w:
             ol_status = False
             ul_status = False
+            p_status = False
             for line in r:
                 length = len(line)
                 # strip to get tag
@@ -54,13 +55,28 @@ if __name__ == "__main__":
                 if not ul_element and ul_status:
                     w.write('</ul>\n')
                     ul_status = False
-
-                w.write(line)
+                
+                # paragraphs and line breaks
+                if not (hlevel or ol_status or ul_status):
+                    if not p_status and length > 1:
+                        w.write('<p>\n')
+                        p_status = True
+                    elif length > 1:
+                        w.write('<br/>\n')
+                    elif p_status:
+                        w.write('</p>\n')
+                        p_status = False
+            
+                if length > 1:
+                    w.write(line)
 
             # close tags if open and EOF
             if ol_status:
                 w.write('</ol>\n')
             if ul_status:
                 w.write('</ul>\n')
+            if p_status:
+                w.write('</p>\n')
 
+    # exit with a success status code
     exit(0)
