@@ -23,7 +23,29 @@ if __name__ == "__main__":
             ul_status = False
             p_status = False
             for line in r:
+
+                # initialize counters for bold and emphasis
+                bold_counter = 0
+                emphasis_counter = 0
+
+                # replace ** with <b> and </b>
+                while '**' in line:
+                    if bold_counter % 2 == 0:
+                        line = line.replace('**', '<b>', 1)
+                    else:
+                        line = line.replace('**', '</b>', 1)
+                    bold_counter += 1
+
+                # replace __ with <em> and </em>
+                while '__' in line:
+                    if emphasis_counter % 2 == 0:
+                        line = line.replace('__', '<em>', 1)
+                    else:
+                        line = line.replace('__', '</em>', 1)
+                    emphasis_counter += 1
+
                 length = len(line)
+
                 # strip to get tag
                 h = line.lstrip('#')
                 hlevel = line.count('#')
