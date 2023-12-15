@@ -16,5 +16,16 @@ if __name__ == "__main__":
     if not os.path.exists(sys.argv[1]):
         sys.stderr.write("Missing " + sys.argv[1] + "\n")
         exit(1)
-    else :
-        exit(0)
+    with open(sys.argv[1], 'r') as r:
+        lines = r.readlines()
+        with open(sys.argv[2], 'w') as w:
+            for line in lines:
+                line = line.strip()
+                if line.startswith("#"):
+                    h = line.count("#")
+                    title = line.strip("#").strip()
+                    html = f"<h{h}>{title}</h{h}>\n"
+                    w.write(html)
+                else:
+                    w.write(f"{line}\n")
+    exit(0)

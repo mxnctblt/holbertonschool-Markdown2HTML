@@ -28,3 +28,19 @@ Requirements:
 - If the Markdown file doesn’t exist: print in STDER Missing <filename> and exit 1
 - Otherwise, print nothing and exit 0
 ```
+
+1. Headings
+```
+Improve markdown2html.py by parsing Headings Markdown syntax for generating HTML:
+
+Syntax: (you can assume it will be strictly this syntax)
+
+Markdown	        |     HTML generated
+____________________________________________________
+# Heading level 1	| <h1>Heading level 1</h1>
+## Heading level 2	| <h2>Heading level 2</h2>
+### Heading level 3	| <h3>Heading level 3</h3>
+#### Heading level 4	| <h4>Heading level 4</h4>
+##### Heading level 5	| <h5>Heading level 5</h5>
+###### Heading level 6	| <h6>Heading level 6</h6>
+```
